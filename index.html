@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI-powered real estate platform helping you find your perfect property in Bangalore" />
+    <title>Propertyfie AI - Future of Real Estate</title>
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" />
+    
+    <!-- DNS prefetch for analytics/CDN -->
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    
+    <!-- Module preload for critical chunks -->
+    <link rel="modulepreload" href="./src/main.tsx" />
+    <link rel="modulepreload" href="./src/App.tsx" />
+    
+    <!-- Critical CSS inline for faster FCP & LCP -->
+    <style>
+      /* Critical above-the-fold styles */
+      body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; background: #030308; -webkit-font-smoothing: antialiased; }
+      #root { min-height: 100vh; }
+      
+      /* Prevent layout shift - critical for LCP */
+      img, video { max-width: 100%; height: auto; display: block; aspect-ratio: attr(width) / attr(height); }
+      * { box-sizing: border-box; }
+      
+      /* Hero section critical styles */
+      .hero-gradient { background: linear-gradient(135deg, #030308 0%, #1a1a2e 100%); }
+      
+      /* Optimize text rendering */
+      h1, h2, h3, h4, h5, h6 { text-rendering: optimizeLegibility; }
+      
+      /* Reduce paint during load */
+      .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s ease-in-out infinite; }
+      @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    </style>
+    
+    <!-- Preload critical fonts with display swap -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Preload and fetch priority for main script -->
+    <link rel="preload" as="script" href="./src/main.tsx" />
+    <link rel="prefetch" href="./src/components/SearchBar.tsx" />
+    
+    <!-- Preload critical images (Hero section) -->
+    <link rel="preload" as="image" href="/images/hero-interior.jpg" />
+    <link rel="preload" as="image" href="/images/spotlight-exterior.jpg" />
+    
+    <!-- DNS prefetch for image domains -->
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  </head>
+  <body>
+    <div id="root">
+      <!-- Inline skeleton for instant paint -->
+      <div class="hero-gradient" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div style="color: white; font-size: 24px; font-weight: bold;">Propertyfie</div>
+      </div>
+    </div>
+    <script type="module" src="./src/main.tsx"></script>
+    
+    <!-- Defer non-critical scripts -->
+    <script>
+      // Performance monitoring
+      if ('PerformanceObserver' in window) {
+        try {
+          const observer = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+              console.log('Performance:', entry.name, entry.startTime);
+            });
+          });
+          observer.observe({ entryTypes: ['paint', 'largest-contentful-paint'] });
+        } catch (e) {}
+      }
+    </script>
+  </body>
+</html>

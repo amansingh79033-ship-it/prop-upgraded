@@ -1,0 +1,9 @@
+export { NotchNavbar } from './NotchNavbar';
+export { Hero } from './Hero';
+// Propsync is lazy-loaded for performance
+export { Partners } from './Partners';
+export { PropertySearch } from './PropertySearch';
+export { Locations } from './Locations';
+export { Features } from './Features';
+export { Contact } from './Contact';
+export { Footer } from './Footer';
