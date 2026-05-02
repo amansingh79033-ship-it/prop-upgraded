@@ -21,7 +21,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
   const [scale, setScale] = useState(1);
 
   // Lock body scroll and enable ESC to close
-  useModalScrollLock();
+  useModalScrollLock(isOpen);
   useModalKeyboardNavigation(onClose);
 
   const handleDragEnd = (_: any, info: PanInfo) => {
@@ -133,7 +133,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
               transformOrigin: 'center center'
             }}
           >
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <div 
+              className="bg-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh]"
+              data-lenis-prevent
+              data-modal="true"
+            >
               {/* Header */}
               <div className="relative bg-gradient-to-r from-blue-600 to-blue-500 p-6">
                 <button

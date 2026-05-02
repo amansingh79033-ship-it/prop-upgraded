@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { PromoBanner } from '../components/PromoBanner';
 import { ContactModal } from '../components/ContactModal';
+import { OptimizedImage } from '../components';
 import { 
   Brain, 
   Shield, 
@@ -169,8 +170,8 @@ export const Features: React.FC = () => {
 
         {/* Benefits Section */}
         <AnimatedSection>
-          <div className="rounded-3xl bg-blueprint-blue overflow-hidden">
-            <div className="grid lg:grid-cols-2">
+          <div className="rounded-3xl bg-blueprint-blue overflow-hidden shadow-2xl">
+            <div className="flex flex-col lg:grid lg:grid-cols-2">
               {/* Content */}
               <div className="p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
                 <span className="label-mono text-white/70 mb-4 block">
@@ -203,14 +204,13 @@ export const Features: React.FC = () => {
               </div>
               
               {/* Image */}
-              <div className="relative h-64 lg:h-auto">
-                <img
+              <div className="relative h-72 sm:h-80 lg:h-auto order-first lg:order-last">
+                <OptimizedImage
                   src="/images/hero-interior.jpg"
                   alt="Modern interior"
-                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-blueprint-blue via-blueprint-blue/50 to-transparent lg:bg-gradient-to-l" />
+                <div className="absolute inset-0 bg-gradient-to-t from-blueprint-blue/80 via-transparent to-transparent lg:bg-gradient-to-l lg:from-blueprint-blue lg:via-blueprint-blue/40 lg:to-transparent" />
               </div>
             </div>
           </div>

@@ -23,7 +23,7 @@ export const EOIModal: React.FC<EOIModalProps> = ({ property, onClose }) => {
   const [recordingError, setRecordingError] = useState('');
 
   // Lock body scroll and enable ESC to close
-  useModalScrollLock();
+  useModalScrollLock(!!property);
   useModalKeyboardNavigation(onClose);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -161,6 +161,8 @@ export const EOIModal: React.FC<EOIModalProps> = ({ property, onClose }) => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ type: 'spring', damping: 25, stiffness: 280 }}
+          data-lenis-prevent
+          data-modal="true"
         >
           {/* Property Header */}
           <div className="relative h-36 overflow-hidden">

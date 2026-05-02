@@ -1,6 +1,8 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
-import { SmoothScroll } from './components/SmoothScroll';
-import { ScrollToTop } from './components/ScrollToTop';
+import { SmoothScroll, ScrollToTop } from './components';
+import {
+  useVisitorTracking
+} from './hooks';
 import {
   NotchNavbar,
   Hero,
@@ -28,6 +30,8 @@ const HelpCenterPage = lazy(() => import('./pages/HelpCenterPage').then(module =
 const ContactUsPage = lazy(() => import('./pages/ContactUsPage').then(module => ({ default: module.ContactUsPage })));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage').then(module => ({ default: module.PrivacyPolicyPage })));
 const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage').then(module => ({ default: module.TermsOfServicePage })));
+const VisionPage = lazy(() => import('./pages/VisionPage').then(module => ({ default: module.VisionPage })));
+const AdminPage = lazy(() => import('./pages/AdminPage').then(module => ({ default: module.AdminPage })));
 
 // Loading fallback component - simplified for faster render
 const LoadingFallback = () => (
@@ -40,6 +44,9 @@ function App() {
   const [currentPage, setCurrentPage] = useState(() => {
     return typeof window !== 'undefined' ? window.location.hash.slice(1) || 'home' : 'home';
   });
+
+  // Real-time visitor tracking and Slack alerting
+  useVisitorTracking(currentPage);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -77,6 +84,10 @@ function App() {
         return <PrivacyPolicyPage />;
       case 'terms':
         return <TermsOfServicePage />;
+      case 'vision':
+        return <VisionPage />;
+      case 'admin':
+        return <AdminPage />;
       default:
         return (
           <>

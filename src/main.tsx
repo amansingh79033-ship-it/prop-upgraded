@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
+import { preloadCriticalImages } from './utils/preloadImages';
+
+// Preload critical assets immediately
+preloadCriticalImages();
 
 // Performance optimizations for faster FCP & LCP
 const root = ReactDOM.createRoot(document.getElementById('root')!);

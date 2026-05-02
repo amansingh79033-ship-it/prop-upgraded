@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { AnimatedSection } from '../components/AnimatedSection';
+import { OptimizedImage } from '../components';
 import { 
   Mail, 
   Phone, 
@@ -244,17 +245,16 @@ Sent via Propertyfie.com
               </div>
 
               {/* Map Placeholder */}
-              <div className="rounded-2xl overflow-hidden h-64 bg-gray-200 relative">
-                <img
+              <div className="rounded-2xl overflow-hidden h-64 bg-gray-200 relative group shadow-lg">
+                <OptimizedImage
                   src="/images/builder-construction.jpg"
                   alt="Office location"
-                  loading="lazy"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                  <div className="text-white">
-                    <div className="font-semibold">Visit Our Office</div>
-                    <div className="text-sm text-white/80">WeWork, Hebbal, Bangalore</div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+                  <div className="text-white transform transition-transform duration-300 group-hover:translate-y-[-4px]">
+                    <div className="font-bold text-lg">Visit Our Office</div>
+                    <div className="text-sm text-white/90">WeWork, Hebbal, Bangalore</div>
                   </div>
                 </div>
               </div>

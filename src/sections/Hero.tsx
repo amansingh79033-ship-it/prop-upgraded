@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SearchBar } from '../components/SearchBar';
-import { ContactModal } from '../components/ContactModal';
+import { SearchBar, ContactModal, OptimizedImage } from '../components';
 import { Sparkles, Loader2, ArrowRight, Phone, MessageCircle, LineChart, MapPin, TrendingUp } from 'lucide-react';
 import { useAIPropertySearch } from '../hooks/useAIPropertySearch';
 import { PropertyDetailsModal } from '../components/PropertyDetailsModal';
@@ -235,8 +234,8 @@ export const Hero: React.FC = () => {
                             className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 overflow-hidden group hover:border-white/30 transition-all duration-300 cursor-pointer"
                             onClick={() => setSelectedProperty(property)}
                           >
-                            <div className="relative h-48 overflow-hidden">
-                              <img 
+                            <div className="relative h-40 sm:h-48 overflow-hidden">
+                              <OptimizedImage 
                                 src={property.image} 
                                 alt={property.title}
                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -302,10 +301,11 @@ export const Hero: React.FC = () => {
                   onClick={() => setSelectedProperty(featuredProperty)}
                 >
                   <div className="relative h-[240px] shrink-0">
-                    <img 
+                    <OptimizedImage 
                       src={featuredProperty.image}
                       alt={featuredProperty.title}
                       className="w-full h-full object-cover"
+                      priority={true}
                     />
                     <div className="absolute top-4 left-4 px-3 py-1 bg-orange-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-sm whitespace-nowrap">
                       {featuredProperty.tag}

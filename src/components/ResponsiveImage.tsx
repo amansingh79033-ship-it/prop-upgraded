@@ -88,10 +88,10 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
 };
 
 /**
- * OptimizedImage Component (Simpler version)
+ * NativeOptimizedImage Component (Simpler version)
  * For when you just need basic optimization
  */
-export const OptimizedImage: React.FC<ResponsiveImageProps> = ({
+export const NativeOptimizedImage: React.FC<ResponsiveImageProps> = ({
   src,
   alt,
   className = '',

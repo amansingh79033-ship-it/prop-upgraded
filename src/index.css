@@ -598,9 +598,7 @@ img {
   display: block;
   /* Prevent layout shift during load */
   aspect-ratio: attr(width) / attr(height);
-  /* Smooth fade-in effect when images load */
-  opacity: 0;
-  animation: imageFadeIn 0.4s ease-out forwards;
+  opacity: 1;
   /* Hardware acceleration for smoother rendering */
   will-change: opacity;
   transform: translateZ(0);

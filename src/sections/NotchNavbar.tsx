@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Home, Building2, MapPin, Phone } from 'lucide-react';
+import { Menu, X, Home, Building2, MapPin, Phone, Eye } from 'lucide-react';
 
 const navItems = [
   { label: 'Home', href: '#home', icon: Home },
   { label: 'Properties', href: '#properties', icon: Building2 },
   { label: 'Locations', href: '#locations', icon: MapPin },
+  { label: 'Vision', href: '#vision', icon: Eye },
   { label: 'Contact', href: '#contact', icon: Phone },
 ];
 
@@ -125,7 +126,7 @@ export const NotchNavbar: React.FC = () => {
                 href="#contact"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navItems.length * 0.1 }}
+                transition={{ delay: (navItems.length + 1) * 0.1 }}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex items-center justify-center gap-2 px-4 py-3 mt-2 rounded-xl bg-blueprint-blue text-white font-semibold hover:bg-blue-700 transition-colors"
               >

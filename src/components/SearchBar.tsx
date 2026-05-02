@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sparkles, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -11,6 +11,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
 }) => {
   const [query, setQuery] = useState('');
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +48,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Try: '3 BHK near airport under 2Cr'"
+          placeholder={windowWidth < 640 ? "tell me project" : "Try: '3 BHK near airport under 2Cr'"}
           className="flex-1 min-w-0 bg-transparent border-none outline-none text-white placeholder:text-gray-500 text-[10px] sm:text-xs md:text-sm py-2.5 sm:py-3 px-2 truncate max-w-full"
         />
 

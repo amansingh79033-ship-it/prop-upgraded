@@ -13,6 +13,7 @@ import {
   X
 } from 'lucide-react';
 import { useModalScrollLock, useModalKeyboardNavigation } from '../hooks/useModalScrollLock';
+import { OptimizedImage } from '../components';
 
 interface LocationData {
   id: number;
@@ -531,7 +532,7 @@ export const Locations: React.FC = () => {
   const [rotationIndex, setRotationIndex] = useState(0);
 
   // Lock body scroll when modal is open and enable ESC to close
-  useModalScrollLock();
+  useModalScrollLock(!!selectedLocation);
   useModalKeyboardNavigation(() => setSelectedLocation(null));
 
   // Auto-rotate locations every 5 seconds - synchronized flip for 4 cards at a time
@@ -567,70 +568,83 @@ export const Locations: React.FC = () => {
         </AnimatedSection>
 
         {/* Locations Grid with Auto-Rotation - 4 cards at a time */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
           <AnimatePresence mode="wait">
-            {getVisibleLocations().map((location, index) => (
-              <motion.div
-                key={`${rotationIndex}-${location.id}`}
-                initial={{ opacity: 0, rotateY: -90 }}
-                animate={{ opacity: 1, rotateY: 0 }}
-                exit={{ opacity: 0, rotateY: 90 }}
-                transition={{ 
-                  duration: 0.6,
-                  type: 'spring',
-                  stiffness: 260,
-                  damping: 20,
-                  delay: index * 0.1
-                }}
-                whileHover={{ scale: 1.05, y: -8 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedLocation(location);
-                }}
-                className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
-                style={{ perspective: 1000 }}
-              >
-                {/* Background Image */}
-                <img
-                  src={location.image}
-                  alt={location.name}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                
-                {/* Content */}
-                <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <h3 className="font-display text-lg sm:text-xl font-bold text-white mb-1">
-                        {location.name}
-                      </h3>
-                      <p className="text-white/70 text-xs sm:text-sm mb-2 line-clamp-2">
-                        {location.description}
-                      </p>
-                      <div className="flex items-center gap-1.5 text-white/90">
-                        <Building className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                        <span className="text-xs sm:text-sm font-medium">
-                          {location.properties} Projects
-                        </span>
+            <motion.div
+              key={rotationIndex}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={{
+                initial: { opacity: 0 },
+                animate: { opacity: 1, transition: { staggerChildren: 0.1 } },
+                exit: { opacity: 0 }
+              }}
+              className="contents"
+            >
+              {getVisibleLocations().map((location, index) => (
+                <motion.div
+                  key={location.id}
+                  variants={{
+                    initial: { opacity: 0, rotateY: -90 },
+                    animate: { opacity: 1, rotateY: 0 },
+                    exit: { opacity: 0, rotateY: 90 }
+                  }}
+                  transition={{ 
+                    duration: 0.6,
+                    type: 'spring',
+                    stiffness: 260,
+                    damping: 20
+                  }}
+                  whileHover={{ scale: 1.05, y: -8 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedLocation(location);
+                  }}
+                  className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
+                  style={{ perspective: 1000 }}
+                >
+                  {/* Background Image */}
+                  <OptimizedImage
+                    src={location.image}
+                    alt={location.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  
+                  {/* Content */}
+                  <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <h3 className="font-display text-lg sm:text-xl font-bold text-white mb-1">
+                          {location.name}
+                        </h3>
+                        <p className="text-white/70 text-xs sm:text-sm mb-2 line-clamp-2">
+                          {location.description}
+                        </p>
+                        <div className="flex items-center gap-1.5 text-white/90">
+                          <Building className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                          <span className="text-xs sm:text-sm font-medium">
+                            {location.properties} Projects
+                          </span>
+                        </div>
                       </div>
+                      <motion.div
+                        className="p-1.5 sm:p-2 rounded-full bg-white/20 backdrop-blur-sm shrink-0"
+                        whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.3)' }}
+                      >
+                        <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                      </motion.div>
                     </div>
-                    <motion.div
-                      className="p-1.5 sm:p-2 rounded-full bg-white/20 backdrop-blur-sm shrink-0"
-                      whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.3)' }}
-                    >
-                      <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                    </motion.div>
                   </div>
-                </div>
 
-                {/* Hover Border Effect */}
-                <div className="absolute inset-0 rounded-2xl border-2 border-white/0 group-hover:border-white/20 transition-colors duration-300" />
-              </motion.div>
-            ))}
+                  {/* Hover Border Effect */}
+                  <div className="absolute inset-0 rounded-2xl border-2 border-white/0 group-hover:border-white/20 transition-colors duration-300" />
+                </motion.div>
+              ))}
+            </motion.div>
           </AnimatePresence>
         </div>
 
@@ -685,6 +699,8 @@ export const Locations: React.FC = () => {
               className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-editorial-ivory rounded-3xl shadow-2xl"
               style={{ pointerEvents: 'auto' }}
               onClick={(e) => e.stopPropagation()}
+              data-lenis-prevent
+              data-modal="true"
             >
               {/* Close Button */}
               <button

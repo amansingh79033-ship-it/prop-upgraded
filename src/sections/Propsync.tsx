@@ -80,6 +80,13 @@ export const Propsync: React.FC = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [reportData, setReportData] = useState<RegulatoryData | null>(null);
   const [loadingStep, setLoadingStep] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const loadingMessages = [
     'Parsing project details...',
@@ -410,7 +417,7 @@ export const Propsync: React.FC = () => {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Enter project name (e.g., Embassy Greenshore)"
+                    placeholder={windowWidth < 640 ? "tell me project" : "Enter project name (e.g., Embassy Greenshore)"}
                     className="w-full pl-16 pr-32 py-6 bg-transparent text-black text-lg placeholder:text-gray-400 outline-none"
                   />
 

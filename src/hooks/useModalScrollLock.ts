@@ -14,8 +14,10 @@ import { useEffect } from 'react';
  * }
  * ```
  */
-export const useModalScrollLock = () => {
+export const useModalScrollLock = (isActive: boolean = true) => {
   useEffect(() => {
+    if (!isActive) return;
+
     // Store original overflow value
     const originalOverflow = document.body.style.overflow;
     const originalPaddingRight = document.body.style.paddingRight;
@@ -34,7 +36,7 @@ export const useModalScrollLock = () => {
       document.body.style.overflow = originalOverflow;
       document.body.style.paddingRight = originalPaddingRight;
     };
-  }, []);
+  }, [isActive]);
 };
 
 /**

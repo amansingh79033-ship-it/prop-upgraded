@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { AnimatedSection } from '../components/AnimatedSection';
+import { AnimatedSection, OptimizedImage } from '../components';
 import { MapPin, Bed, Bath, Square, Heart, ArrowRight } from 'lucide-react';
 
 import { properties, Property } from '../data/properties';
@@ -45,11 +45,11 @@ export const PropertySearch: React.FC = () => {
               >
                 {/* Image */}
                 <div className="property-card-image relative shrink-0">
-                  <img
+                  <OptimizedImage
                     src={property.image}
                     alt={property.title}
-                    loading="lazy"
                     className="w-full h-full object-cover"
+                    priority={index < 2}
                   />
                   {/* Tag */}
                   <span className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2.5 py-1 sm:px-3 sm:py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] sm:text-xs font-semibold text-text-primary whitespace-normal max-w-[70%]">

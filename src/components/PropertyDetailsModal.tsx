@@ -26,7 +26,7 @@ export const PropertyDetailsModal: React.FC<PropertyDetailsModalProps> = ({ prop
   const [scale, setScale] = useState(1);
   
   // Lock body scroll when modal is open and enable ESC to close
-  useModalScrollLock();
+  useModalScrollLock(!!property);
   useModalKeyboardNavigation(onClose);
 
   const handleDragEnd = (_: any, info: PanInfo) => {
@@ -120,6 +120,7 @@ export const PropertyDetailsModal: React.FC<PropertyDetailsModalProps> = ({ prop
           }}
           style={{ touchAction: 'pan-y', transformOrigin: 'center center' }}
           data-modal="true"
+          data-lenis-prevent
         >
           {/* Main Content Area */}
           <div className="flex-1 overflow-y-auto custom-scrollbar">

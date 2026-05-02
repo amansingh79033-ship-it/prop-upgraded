@@ -156,6 +156,7 @@ const footerLinks = {
     { label: 'Careers', href: '#careers', modal: 'careers' },
     { label: 'Press', href: '#press', modal: 'press' },
     { label: 'Blog', href: '#blog', modal: 'blog' },
+    { label: 'Our Vision', href: '#vision' },
   ],
   properties: [
     { label: 'Buy', href: '#buy', modal: 'buy' },
@@ -370,7 +371,7 @@ export const Footer: React.FC = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.modal)}
+                    onClick={(e) => link.modal ? handleLinkClick(e, link.modal) : null}
                     className="text-white/60 hover:text-white transition-colors text-sm inline-flex items-center gap-1 group cursor-pointer"
                   >
                     {link.label}
@@ -389,7 +390,7 @@ export const Footer: React.FC = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.modal)}
+                    onClick={(e) => link.modal ? handleLinkClick(e, link.modal) : null}
                     className="text-white/60 hover:text-white transition-colors text-sm inline-flex items-center gap-1 group cursor-pointer"
                   >
                     {link.label}
@@ -408,7 +409,7 @@ export const Footer: React.FC = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.modal)}
+                    onClick={(e) => link.modal ? handleLinkClick(e, link.modal) : null}
                     className="text-white/60 hover:text-white transition-colors text-sm inline-flex items-center gap-1 group cursor-pointer"
                   >
                     {link.label}
