@@ -6,10 +6,8 @@ import { OptimizedImage } from '../components';
 import { 
   ShieldCheck, 
   TrendingUp, 
-  Users, 
   Target, 
   Gem, 
-  Zap, 
   ChevronRight,
   Sparkles,
   Heart,
