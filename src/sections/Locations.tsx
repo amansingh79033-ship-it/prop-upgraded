@@ -582,7 +582,7 @@ export const Locations: React.FC = () => {
               }}
               className="contents"
             >
-              {getVisibleLocations().map((location, index) => (
+              {getVisibleLocations().map((location) => (
                 <motion.div
                   key={location.id}
                   variants={{

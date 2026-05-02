@@ -14,7 +14,8 @@ import {
   Sparkles,
   Heart,
   Eye,
-  Award
+  Award,
+  X
 } from 'lucide-react';
 
 const visionPoints = [
@@ -142,7 +143,7 @@ export const VisionPage: React.FC = () => {
       <section id="founder" className="py-24 lg:py-40 bg-editorial-ivory overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <AnimatedSection direction="left">
+            <AnimatedSection>
               <div className="relative group">
                 <div className="absolute -inset-4 bg-gradient-to-br from-blueprint-blue/20 to-purple-500/20 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white">
@@ -160,7 +161,7 @@ export const VisionPage: React.FC = () => {
               </div>
             </AnimatedSection>
 
-            <AnimatedSection direction="right" delay={0.2}>
+            <AnimatedSection delay={0.2}>
               <div className="space-y-8">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blueprint-blue/10 border border-blueprint-blue/20">
                   <Award className="w-4 h-4 text-blueprint-blue" />
